@@ -1,0 +1,44 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicAndBooksDownloader.View.ShowResultsPage">
+    <ContentPage.Content>
+        <StackLayout BackgroundColor="White">
+            <TableView x:Name="resultTable">
+                <TableView.Root>
+                    <TableRoot>
+                        <TableSection>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal">
+                                        <Label Text="Search results" FontAttributes="Bold" Margin="10" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                        <ImageButton Source="sort1.png" WidthRequest="30" HeightRequest="30" BackgroundColor="White" Margin="5"/>
+                                        <ImageButton Source="opt1.png" WidthRequest="25" HeightRequest="25" BackgroundColor="White" Margin="5"/>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal">
+                                        <ImageButton Source="dl1.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Orange" Margin="5"/>
+                                        <ImageButton Source="pl1.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Orange" Margin="-5,5,0,5"/>
+                                        <Label Text="ArtistName-Song3.mp3" HorizontalOptions="Start" TextColor="Black" Margin="12"/>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                            <ViewCell>
+                                <ViewCell.View>
+                                    <StackLayout Orientation="Horizontal">
+                                        <ImageButton Source="dl1.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Orange" Margin="5"/>
+                                        <ImageButton Source="pl1.png" WidthRequest="30" HeightRequest="30" BackgroundColor="Orange" Margin="-5,5,0,5"/>
+                                        <Label Text="ArtistName-Song2.mp3" HorizontalOptions="Start" TextColor="Black" Margin="12"/>
+                                    </StackLayout>
+                                </ViewCell.View>
+                            </ViewCell>
+                        </TableSection> 
+                    </TableRoot>
+                </TableView.Root>
+            </TableView>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

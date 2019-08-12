@@ -1,0 +1,37 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="MusicAndBooksDownloader.View.MusicPage">
+        
+    
+    <ContentPage.Content>
+       
+        <StackLayout BackgroundColor="White">
+            
+            <Label Text="Enter Song or Artist name:" TextColor="Black"
+                 HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
+            
+            <SearchBar x:Name="MusicSearchText" BackgroundColor="LightYellow" HorizontalOptions="Center"
+                       VerticalOptions="CenterAndExpand" TextColor="Black"/>
+            <Label Text="Search options:" TextColor="Black" FontSize="Small" HorizontalOptions="Start"
+                   VerticalOptions="CenterAndExpand" Margin="30,0,0,0"/>
+            <StackLayout WidthRequest="250" Orientation="Horizontal" VerticalOptions="CenterAndExpand"
+                         HorizontalOptions="Center">
+                <Switch IsToggled="True" OnColor="Orange" x:Name="searchOption" Toggled="SaerchOption_Toggled"/>
+                <Label x:Name="searchOptionLabel" Text="All sites" TextColor="Black"/>
+                <ImageButton x:Name="searchOptionImg" Source="schopn.png" HorizontalOptions="EndAndExpand" Margin="30,0,0,0" 
+                             HeightRequest="25" WidthRequest="25" BackgroundColor="White" IsVisible="False"
+                             Clicked="SearchOptionImg_Clicked"/>
+            </StackLayout>
+            <Label Text="Input sort options:" TextColor="Black" FontSize="Small" HorizontalOptions="Start"
+                   VerticalOptions="CenterAndExpand" Margin="30,0,0,0"/>
+            <StackLayout WidthRequest="250" Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
+                <Switch x:Name="inputOption"  IsToggled="True" OnColor="Orange" Toggled="Switch_Toggled"/>
+                <Label x:Name="atozLable" Text="A - z" TextColor="Black"/>
+            </StackLayout>
+            
+            <Button Text="Saerch" WidthRequest="250" HorizontalOptions="Center"
+                    VerticalOptions="CenterAndExpand" BackgroundColor="Orange" Clicked="Button_Clicked"/>
+        </StackLayout>
+    </ContentPage.Content>
+</ContentPage>

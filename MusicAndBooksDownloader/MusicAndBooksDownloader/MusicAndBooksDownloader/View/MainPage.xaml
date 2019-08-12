@@ -1,0 +1,19 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:local="clr-namespace:MusicAndBooksDownloader"
+             x:Class="MusicAndBooksDownloader.MainPage">
+
+    <StackLayout BackgroundColor="White">
+        <Button BackgroundColor="Orange" WidthRequest="250" Text="Music"
+                HorizontalOptions="Center" VerticalOptions="CenterAndExpand"
+                HeightRequest="120" Clicked="Button_Clicked"/>
+        <Button BackgroundColor="Orange" WidthRequest="250" Text="Books"
+                HorizontalOptions="Center" VerticalOptions="CenterAndExpand"
+                HeightRequest="120"/>
+        <Button BackgroundColor="Orange" WidthRequest="250" Text="AudioBooks"
+                HorizontalOptions="Center" VerticalOptions="CenterAndExpand"
+                HeightRequest="120"/>
+    </StackLayout>
+
+</ContentPage>
