@@ -7,6 +7,8 @@ namespace MusicAndBooksDownloader.View
     [XamlCompilation(XamlCompilationOptions.Compile)]
 	public partial class MusicPage : ContentPage
 	{
+        bool sortSwitcher = true;
+
 		public MusicPage ()
 		{
 			InitializeComponent ();
@@ -16,9 +18,15 @@ namespace MusicAndBooksDownloader.View
         private void Switch_Toggled(object sender, ToggledEventArgs e)
         {
             if (inputOption.IsToggled == true)
+            {
                 atozLable.Text = "A - z";
+                sortSwitcher = true;
+            }
             else
+            {
                 atozLable.Text = "Z - a";
+                sortSwitcher = false;
+            }
         }
 
         private void SaerchOption_Toggled(object sender, ToggledEventArgs e)
@@ -42,7 +50,7 @@ namespace MusicAndBooksDownloader.View
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ShowResultsPage());
+            await Navigation.PushAsync(new ShowResultsPage(MusicSearchText.Text, sortSwitcher));
         }
     }
 }

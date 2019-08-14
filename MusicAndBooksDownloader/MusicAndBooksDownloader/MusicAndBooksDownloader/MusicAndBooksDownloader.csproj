@@ -24,6 +24,9 @@
   </ItemGroup>
 
   <ItemGroup>
+    <EmbeddedResource Update="View\DownloadSettingsPage.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Update="View\MusicPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -33,10 +36,6 @@
     <EmbeddedResource Update="View\ShowResultsPage.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Controller\" />
   </ItemGroup>
 
   <ItemGroup>
