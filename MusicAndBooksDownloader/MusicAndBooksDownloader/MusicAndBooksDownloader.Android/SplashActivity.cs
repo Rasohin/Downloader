@@ -1,4 +1,4 @@
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Android.App;
 using Android.Content;
 using Android.OS;
@@ -25,7 +25,7 @@ namespace MusicAndBooksDownloader.Droid
 
         async void SimulateStartup()
         {
-            await Task.Delay(6000); // Simulate a startup work
+            await Task.Delay(1000); // Simulate a startup work
             StartActivity(new Intent(Application.Context, typeof(MainActivity)));
         }
     }
