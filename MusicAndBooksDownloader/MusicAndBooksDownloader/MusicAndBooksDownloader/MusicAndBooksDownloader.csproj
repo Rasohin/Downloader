@@ -10,12 +10,8 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <None Remove="Model\config.xml" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <EmbeddedResource Include="Model\config.xml">
-      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    <EmbeddedResource Include="Model\sites.xml">
+      <CopyToOutputDirectory>Never</CopyToOutputDirectory>
     </EmbeddedResource>
   </ItemGroup>
 

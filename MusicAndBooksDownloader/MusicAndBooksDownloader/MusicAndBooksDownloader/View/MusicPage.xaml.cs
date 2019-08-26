@@ -1,4 +1,5 @@
-﻿using System;
+﻿using MusicAndBooksDownloader.Model;
+using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -12,6 +13,7 @@ namespace MusicAndBooksDownloader.View
 		public MusicPage ()
 		{
 			InitializeComponent ();
+            //SitesList.Create();
 		}
 
        

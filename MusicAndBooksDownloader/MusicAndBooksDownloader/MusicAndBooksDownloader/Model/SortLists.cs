@@ -10,7 +10,7 @@ namespace MusicAndBooksDownloader.Model
                 list.Sort(Songs.CompareSongsNameAtoZ);
             else
                 list.Sort(Songs.CompareSongsNameZtoA);
-
+            
             return list;
         }
     }
