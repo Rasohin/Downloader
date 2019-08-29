@@ -12,7 +12,7 @@
                             <ViewCell>
                                 <ViewCell.View>
                                     <StackLayout Orientation="Horizontal">
-                                        <Label Text="Search results" FontAttributes="Bold" Margin="10" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                        <Label x:Name="searchLbl" Text="Searching..." FontAttributes="Bold" Margin="10" TextColor="Black" HorizontalOptions="StartAndExpand"/>
                                         <ImageButton x:Name="sortBtn" WidthRequest="30" HeightRequest="30" BackgroundColor="White" Margin="5" Clicked="SortImageButton_Clicked"/>
                                         <ImageButton Source="opt1.png" WidthRequest="25" HeightRequest="25" BackgroundColor="White" Margin="5" Clicked="SettingsImageButton_Clicked"/>
                                     </StackLayout>

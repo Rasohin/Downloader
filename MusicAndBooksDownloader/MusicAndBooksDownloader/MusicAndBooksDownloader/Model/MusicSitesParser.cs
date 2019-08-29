@@ -4,27 +4,25 @@ using System.IO;
 using System.Net;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace MusicAndBooksDownloader.Model
 {
     public class MusicSitesParser
     {
         List<Songs> _result = new List<Songs>();
+        private bool endOfSearch = false;
        
-
         public MusicSitesParser()
         {
-
+            
         }
 
-        List<string> indexes;
-       
-        public void ParsingSite(string req)
+        public async void ParsingSite(string req)
         {
             if (req.Trim() != "")
             {
                 _result.Clear();
-                indexes = new List<string>();
                 string finderMusic = req;
                 //WebRequest request = WebRequest.Create("https://wwu.mp3-tut.online/search?query=" + finderMusic);
                 //WebResponse response = request.GetResponse();
@@ -69,45 +67,49 @@ namespace MusicAndBooksDownloader.Model
                 string search = reader.ReadToEnd();
                 int index = search.ToLower().IndexOf("<div class=\"musicset-track-list__items\">");
                 search = search.Remove(0, index);
-                while (search.Remove(0, search.IndexOf("<a href=\"") + 9).IndexOf("\" class=") != -1 && _result.Count<3)
-                {
-                    try
+
+                await Task.Run(() => {
+                    endOfSearch = false;
+                    while (search.Remove(0, search.IndexOf("<a href=\"") + 9).IndexOf("\" class=") != -1)
                     {
-                        string musicPage = search.Remove(0, search.IndexOf("<a href=\"") + 9);
-                        musicPage = musicPage.Remove(musicPage.IndexOf("\" class="));
-                        search = search.Remove(search.IndexOf("<a href=\""), 50);
-                        request = WebRequest.Create("https://zaycev.net" + musicPage);
-                        response = request.GetResponse();
-                        stream = response.GetResponseStream();
-                        reader = new StreamReader(stream);
-                        string site;
-                        site = reader.ReadToEnd();
-                        string musicName;
-                        musicName = site.Remove(0, site.IndexOf("На музыкальном портале Зайцев.нет Вы можете бесплатно скачать и слушать онлайн песню «") + 86);
-                        musicName = musicName.Remove(musicName.IndexOf("»"));
-                        string authorName;
-                        authorName = site.Remove(0, site.IndexOf("На музыкальном портале Зайцев.нет Вы можете бесплатно скачать и слушать онлайн песню «" + musicName + "» (") + 89 + musicName.Length);
-                        authorName = authorName.Remove(authorName.IndexOf(")"));
-                        if (site.IndexOf("<a target=\"__blank\" data-cacheable=\"true\" class=\"button-download__link\" id=\"audiotrack-download-link--dwnl\" href=\"") != -1)
+                        try
                         {
-                            site = site.Remove(0, site.IndexOf("<a target=\"__blank\" data-cacheable=\"true\" class=\"button-download__link\" id=\"audiotrack-download-link--dwnl\" href=\"") + 128);
-                            site = site.Remove(site.IndexOf("\"><img src=\""));
-                            if (!indexes.Contains("https://cdndl." + site) && !isHave(musicName, authorName))
+                            string musicPage = search.Remove(0, search.IndexOf("<a href=\"") + 9);
+                            musicPage = musicPage.Remove(musicPage.IndexOf("\" class="));
+                            search = search.Remove(search.IndexOf("<a href=\""), 50);
+                            request = WebRequest.Create("https://zaycev.net" + musicPage);
+                            response = request.GetResponse();
+                            stream = response.GetResponseStream();
+                            reader = new StreamReader(stream);
+                            string site;
+                            site = reader.ReadToEnd();
+                            string musicName;
+                            musicName = site.Remove(0, site.IndexOf("На музыкальном портале Зайцев.нет Вы можете бесплатно скачать и слушать онлайн песню «") + 86);
+                            musicName = musicName.Remove(musicName.IndexOf("»"));
+                            string authorName;
+                            authorName = site.Remove(0, site.IndexOf("На музыкальном портале Зайцев.нет Вы можете бесплатно скачать и слушать онлайн песню «" + musicName + "» (") + 89 + musicName.Length);
+                            authorName = authorName.Remove(authorName.IndexOf(")"));
+                            if (site.IndexOf("<a target=\"__blank\" data-cacheable=\"true\" class=\"button-download__link\" id=\"audiotrack-download-link--dwnl\" href=\"") != -1)
                             {
-                                Songs song = new Songs();
-                                song.Name = $"{authorName} - {musicName}.mp3";
-                                song.playLink = "play";
-                                song.downloadLink = "https://cdndl." + site;
-                                _result.Add(song);
+                                site = site.Remove(0, site.IndexOf("<a target=\"__blank\" data-cacheable=\"true\" class=\"button-download__link\" id=\"audiotrack-download-link--dwnl\" href=\"") + 128);
+                                site = site.Remove(site.IndexOf("\"><img src=\""));
+                                if (!isHave(musicName, authorName))
+                                {
+                                    Songs song = new Songs();
+                                    song.Name = $"{authorName} - {musicName}.mp3";
+                                    song.playLink = "play";
+                                    song.downloadLink = "https://cdndl." + site;
+                                    _result.Add(song);
+                                }
                             }
                         }
+                        catch { }
                     }
-                    catch { }
-                }
-                response.Close();
-                stream.Close();
-                reader.Close();
-                  
+                    endOfSearch = true;
+                    response.Close();
+                    stream.Close();
+                    reader.Close();
+                });
             }
         }
 
@@ -121,9 +123,19 @@ namespace MusicAndBooksDownloader.Model
             return false;
         }
 
-        public List<Songs> GetParsingResult(string request)
+        //public List<Songs> GetParsingResult(string request)
+        //{
+        //    ParsingSite(request);
+        //    return _result;
+        //}
+
+        public bool GetEnd()
         {
-            ParsingSite(request);
+            return endOfSearch;
+        }
+
+        public List<Songs> GetResult()
+        {
             return _result;
         }
     }

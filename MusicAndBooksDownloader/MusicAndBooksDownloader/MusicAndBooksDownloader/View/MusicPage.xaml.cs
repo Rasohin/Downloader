@@ -54,5 +54,7 @@ namespace MusicAndBooksDownloader.View
         {
             await Navigation.PushAsync(new ShowResultsPage(MusicSearchText.Text, sortSwitcher));
         }
+
+
     }
 }

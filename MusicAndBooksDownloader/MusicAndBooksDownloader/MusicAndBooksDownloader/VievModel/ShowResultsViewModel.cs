@@ -11,17 +11,25 @@ namespace MusicAndBooksDownloader.ViewModel
     public class ShowResultsViewModel : INotifyPropertyChanged
     {
         public event PropertyChangedEventHandler PropertyChanged;
-        private List<Songs> _result = new List<Songs>();
+
+        private MusicSitesParser parser = new MusicSitesParser();
 
         public ShowResultsViewModel(string request)
         {
-            var result = new MusicSitesParser().GetParsingResult(request);
-            _result = result;
+            parser.ParsingSite(request);
+        }
+
+        public bool GetEnd()
+        {
+            bool end = parser.GetEnd();
+            return end;
         }
 
         public List<Songs> GetResult()
         {
-            return _result;
+            var result = parser.GetResult();
+
+            return result;
         }
     }
 }
