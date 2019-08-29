@@ -7,6 +7,7 @@ using Xamarin.Forms.Xaml;
 using System;
 using MusicAndBooksDownloader.Interfaces;
 using System.Threading.Tasks;
+using Android.Media;
 
 namespace MusicAndBooksDownloader.View
 {
@@ -15,8 +16,9 @@ namespace MusicAndBooksDownloader.View
 	{
         ShowResultsViewModel myCtrl;
         bool sortButton = true;
+        MPlayer player = MPlayer.Create();
 
-		public ShowResultsPage (string request, bool sort)
+        public ShowResultsPage (string request, bool sort)
 		{
 			InitializeComponent ();
             myCtrl = new ShowResultsViewModel(request);
@@ -32,7 +34,17 @@ namespace MusicAndBooksDownloader.View
                 sortBtn.Source = "sort2.png";
                 sortButton = false;
             }
+        }
 
+        protected override void OnDisappearing()
+        {
+            player.Stop();
+            player.Release();
+        }
+
+        protected override void OnAppearing()
+        {
+            player = MPlayer.Create();
         }
 
         // начальное заполнение - асинхронно
@@ -124,9 +136,23 @@ namespace MusicAndBooksDownloader.View
             await DisplayAlert("Подтверждение", "Файл успешно сохранен!", "ОК");
         }
 
+        public void StartPlayer(String filePath)
+        {
+            player.Reset();
+            player.SetDataSource(filePath);
+            player.Prepare();
+            player.Start();
+        }
+
         private void PlayButton_Clicked(object sender, System.EventArgs e)
         {
-            //тут будет проигрываться файл
+            ImageButton btn = (ImageButton)sender;
+            ViewCell cell = (ViewCell)btn.Parent.Parent;
+            int index = resultTableSection.IndexOf(cell);
+
+            string filename = myCtrl.GetResult()[index - 1].downloadLink;
+            if (String.IsNullOrEmpty(filename)) return;
+            StartPlayer(filename);
         }
 
         private void SortImageButton_Clicked(object sender, System.EventArgs e)
@@ -149,5 +175,7 @@ namespace MusicAndBooksDownloader.View
         {
             await Navigation.PushAsync(new DownloadSettingsPage());
         }
+
+
     }
 }

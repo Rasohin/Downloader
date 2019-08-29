@@ -52,7 +52,10 @@ namespace MusicAndBooksDownloader.View
 
         private async void Button_Clicked(object sender, EventArgs e)
         {
-            await Navigation.PushAsync(new ShowResultsPage(MusicSearchText.Text, sortSwitcher));
+            if(String.IsNullOrEmpty(MusicSearchText.Text))
+                await DisplayAlert("Предупреждение", "Строка поиска пуста!", "ОК");
+            else
+                await Navigation.PushAsync(new ShowResultsPage(MusicSearchText.Text, sortSwitcher));
         }
 
 
