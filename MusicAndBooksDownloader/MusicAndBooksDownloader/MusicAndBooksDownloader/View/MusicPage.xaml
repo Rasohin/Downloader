@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MusicAndBooksDownloader.View.MusicPage">
+             x:Class="MusicAndBooksDownloader.View.MusicPage" Title="Music search">
         
     
     <ContentPage.Content>
@@ -12,8 +12,8 @@
                  HorizontalOptions="Center" VerticalOptions="CenterAndExpand"/>
             
             <SearchBar x:Name="MusicSearchText" BackgroundColor="LightYellow" HorizontalOptions="Center"
-                       VerticalOptions="CenterAndExpand" TextColor="Black"/>
-            <Label Text="Search options:" TextColor="Black" FontSize="Small" HorizontalOptions="Start"
+                       VerticalOptions="CenterAndExpand" TextColor="Black" Text="{Binding TextRequest}"/>
+            <Label Text="Search engine options:" TextColor="Black" FontSize="Small" HorizontalOptions="Start"
                    VerticalOptions="CenterAndExpand" Margin="30,0,0,0"/>
             <StackLayout WidthRequest="250" Orientation="Horizontal" VerticalOptions="CenterAndExpand"
                          HorizontalOptions="Center">
@@ -21,8 +21,9 @@
                 <Label x:Name="searchOptionLabel" Text="All sites" TextColor="Black"/>
                 <ImageButton x:Name="searchOptionImg" Source="schopn.png" HorizontalOptions="EndAndExpand" Margin="30,0,0,0" 
                              HeightRequest="25" WidthRequest="25" BackgroundColor="White" IsVisible="False"
-                             Clicked="SearchOptionImg_Clicked"/>
+                             Command="{Binding optionBtnClick}"/>
             </StackLayout>
+            
             <Label Text="Input sort options:" TextColor="Black" FontSize="Small" HorizontalOptions="Start"
                    VerticalOptions="CenterAndExpand" Margin="30,0,0,0"/>
             <StackLayout WidthRequest="250" Orientation="Horizontal" VerticalOptions="CenterAndExpand" HorizontalOptions="Center">
@@ -31,7 +32,7 @@
             </StackLayout>
             
             <Button Text="Saerch" WidthRequest="250" HorizontalOptions="Center"
-                    VerticalOptions="CenterAndExpand" BackgroundColor="Orange" Clicked="Button_Clicked"/>
+                    VerticalOptions="CenterAndExpand" BackgroundColor="Orange" Command="{Binding searchBtnClick}"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

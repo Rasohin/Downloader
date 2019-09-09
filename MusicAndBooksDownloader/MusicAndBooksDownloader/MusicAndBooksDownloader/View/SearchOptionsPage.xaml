@@ -1,19 +1,19 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MusicAndBooksDownloader.View.SearchOptionsPage">
+             x:Class="MusicAndBooksDownloader.View.SearchOptionsPage" Title="Search engine options">
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
+        <StackLayout BackgroundColor="White" x:Name="testStc">
             <TableView>
                 <TableView.Root>
                     <TableRoot>
-                        <TableSection Title="Search options">
-                            <SwitchCell On="True" x:Name="switch1" Text="Zaicev.Net"/>
-                            <SwitchCell On="True" x:Name="switch2" Text="AnotherSites"/>
+                        <TableSection Title="Parsing sites" x:Name="parsingSites">
+                            
                         </TableSection>
                     </TableRoot>
                 </TableView.Root>
             </TableView>
+            <Button Text="Save" Clicked="Button_Clicked"/>
         </StackLayout>
     </ContentPage.Content>
 </ContentPage>

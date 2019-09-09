@@ -1,6 +1,5 @@
-﻿using System;
-using Xamarin.Forms;
-using MusicAndBooksDownloader.View;
+﻿using Xamarin.Forms;
+using MusicAndBooksDownloader.ViewModel;
 
 namespace MusicAndBooksDownloader
 {
@@ -9,11 +8,8 @@ namespace MusicAndBooksDownloader
         public MainPage()
         {
             InitializeComponent();
+            BindingContext = new MainPageViewModel() { Navigation = this.Navigation };
         }
 
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new MusicPage());
-        }
     }
 }

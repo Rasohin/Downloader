@@ -1,4 +1,5 @@
 ﻿using MusicAndBooksDownloader.Model;
+using MusicAndBooksDownloader.ViewModel;
 using System;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
@@ -13,8 +14,8 @@ namespace MusicAndBooksDownloader.View
 		public MusicPage ()
 		{
 			InitializeComponent ();
-            //SitesList.Create();
-		}
+            BindingContext = new MusicPageViewModel() { Navigation = this.Navigation};
+        }
 
        
         private void Switch_Toggled(object sender, ToggledEventArgs e)
@@ -44,20 +45,5 @@ namespace MusicAndBooksDownloader.View
                 searchOptionImg.IsVisible = true;
             }
         }
-
-        private async void SearchOptionImg_Clicked(object sender, EventArgs e)
-        {
-            await Navigation.PushAsync(new SearchOptionsPage());
-        }
-
-        private async void Button_Clicked(object sender, EventArgs e)
-        {
-            if(String.IsNullOrEmpty(MusicSearchText.Text))
-                await DisplayAlert("Предупреждение", "Строка поиска пуста!", "ОК");
-            else
-                await Navigation.PushAsync(new ShowResultsPage(MusicSearchText.Text, sortSwitcher));
-        }
-
-
     }
 }

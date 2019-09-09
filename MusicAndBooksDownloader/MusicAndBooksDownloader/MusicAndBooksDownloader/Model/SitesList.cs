@@ -1,31 +1,15 @@
-﻿
-using System;
-using System.Collections.Generic;
-using System.IO;
-using System.Reflection;
-using System.Resources;
-using System.Text;
-using System.Xml.Linq;
-
+﻿using System.Collections.Generic;
+using System.Xml.Serialization;
 
 namespace MusicAndBooksDownloader.Model
 {
-    internal sealed class SitesList
+    [XmlRoot("SitesList")]
+    public class SitesList
     {
-        private static SitesList sites;
+        
+        public SitesList() { this.sites = new List<Site>(); }
 
-       
-
-        private SitesList()
-        {
-            
-            XDocument document = XDocument.Load("");
-            var root = document.Root;
-        }
-
-        public static SitesList Create()
-        {
-            return sites ?? new SitesList();
-        }
+        [XmlElement("Site")]
+        public List<Site> sites { get; set; }
     }
 }

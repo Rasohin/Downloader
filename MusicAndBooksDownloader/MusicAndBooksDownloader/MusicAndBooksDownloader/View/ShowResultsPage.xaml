@@ -1,27 +1,58 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <ContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="MusicAndBooksDownloader.View.ShowResultsPage">
-    
+             xmlns:local="clr-namespace:MusicAndBooksDownloader.Model"
+             x:Class="MusicAndBooksDownloader.View.ShowResultsPage" Title="Results">
+    <ContentPage.Resources>
+        <ResourceDictionary>
+            <local:TimeConverter x:Key="converter"/>
+        </ResourceDictionary>
+    </ContentPage.Resources>
     <ContentPage.Content>
-        <StackLayout BackgroundColor="White">
-            <TableView x:Name="resultTable">
-                <TableView.Root>
-                    <TableRoot>
-                        <TableSection x:Name="resultTableSection">
-                            <ViewCell>
-                                <ViewCell.View>
-                                    <StackLayout Orientation="Horizontal">
-                                        <Label x:Name="searchLbl" Text="Searching..." FontAttributes="Bold" Margin="10" TextColor="Black" HorizontalOptions="StartAndExpand"/>
-                                        <ImageButton x:Name="sortBtn" WidthRequest="30" HeightRequest="30" BackgroundColor="White" Margin="5" Clicked="SortImageButton_Clicked"/>
-                                        <ImageButton Source="opt1.png" WidthRequest="25" HeightRequest="25" BackgroundColor="White" Margin="5" Clicked="SettingsImageButton_Clicked"/>
-                                    </StackLayout>
-                                </ViewCell.View>
-                            </ViewCell>
-                        </TableSection>
-                    </TableRoot>
-                </TableView.Root>
-            </TableView>
-        </StackLayout>
+        <RelativeLayout>
+            <StackLayout BackgroundColor="White">
+                <TableView x:Name="resultTable">
+                    <TableView.Root>
+                        <TableRoot>
+                            <TableSection x:Name="resultTableSection">
+                                <ViewCell>
+                                    <ViewCell.View>
+                                        <StackLayout Orientation="Horizontal">
+                                            <Label x:Name="searchLbl" Text="Searching..." FontAttributes="Bold" Margin="10" TextColor="Black" HorizontalOptions="StartAndExpand"/>
+                                            <ImageButton x:Name="sortBtn" Source="sort1.png" WidthRequest="30" HeightRequest="30" BackgroundColor="White" Margin="5" Clicked="SortImageButton_Clicked"/>
+                                            <ImageButton Source="opt1.png" WidthRequest="25" HeightRequest="25" BackgroundColor="White" Margin="5" Command="{Binding optionBtnClick}"/>
+                                        </StackLayout>
+                                    </ViewCell.View>
+                                </ViewCell>
+                            </TableSection>
+                        </TableRoot>
+                    </TableView.Root>
+                </TableView>
+            </StackLayout>
+            <Grid BackgroundColor="#2196F3" x:Name="playerBox"
+                RelativeLayout.YConstraint="{ConstraintExpression Type=RelativeToParent,
+                Property=Height,Factor=.82,Constant=0}"
+                RelativeLayout.WidthConstraint="{ConstraintExpression
+                Type=RelativeToParent,Property=Width,Factor=1,Constant=0}"
+                RelativeLayout.HeightConstraint="{ConstraintExpression
+                Type=RelativeToParent,Property=Height,Factor=.18,Constant=0}" IsVisible="{Binding PlayerVisible}">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition Height="0.3*"></RowDefinition>
+                    <RowDefinition Height="0.4*"></RowDefinition>
+                </Grid.RowDefinitions>
+                <Label x:Name="songNameLbl" Text="{Binding Path=TrackName}" Margin="3" Grid.Row="0" FontSize="Small" TextColor="Black" HorizontalOptions="CenterAndExpand"/>
+                <StackLayout Orientation="Horizontal" Grid.Row="1">
+                    <Label x:Name="startLbl" Text="{Binding Position, Converter={StaticResource converter}}" WidthRequest="35" HorizontalOptions="Start" Margin="3,0,0,0" FontSize="Small"/>
+                    <Slider x:Name="mediaSlider" Value="{Binding Position, Mode=TwoWay}" Maximum="{Binding SliderMax}" Minimum="0" WidthRequest="230" HorizontalOptions="CenterAndExpand" ValueChanged="Slider_ValueChanged"/>
+                    <Label x:Name="endLbl" Text="{Binding SecDuration, StringFormat='-{0}', Converter={StaticResource converter}}" WidthRequest="35" HorizontalOptions="End" Margin="0,0,3,0" FontSize="Small"/>
+                </StackLayout>
+                <StackLayout Orientation="Horizontal" Grid.Row="2">
+                    <Label x:Name="testLbl"/>
+                    <ImageButton x:Name="playerImgBtn" Source="pause.png" Clicked="MediaPlayerButton_Clicked" HorizontalOptions="CenterAndExpand" Command="{Binding pauseBtnClick}"/>
+                </StackLayout>
+                
+            </Grid>
+        </RelativeLayout>
     </ContentPage.Content>
 </ContentPage>

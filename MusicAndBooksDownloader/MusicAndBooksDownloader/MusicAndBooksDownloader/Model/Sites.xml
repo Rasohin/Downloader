@@ -1,0 +1,16 @@
+﻿<?xml version="1.0" encoding="UTF-8" ?>
+<SitesList xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema">
+  <Site>
+    <Name>Zaicev</Name>
+    <State>on</State>
+  </Site>
+  <Site>
+    <Name>mp3tut</Name>
+    <State>on</State>
+  </Site>
+  <Site>
+    <Name>YandexMusic</Name>
+    <State>off</State>
+  </Site>
+</SitesList>
+  

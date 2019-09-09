@@ -40,7 +40,6 @@ namespace MusicAndBooksDownloader.Droid
                 WebClient client = new WebClient();
                 client.DownloadFileAsync(new Uri(song.downloadLink), filepath);
             });
-           
         }
         // вспомогательный метод для построения пути к файлу
         string GetFilePath(string filename)
